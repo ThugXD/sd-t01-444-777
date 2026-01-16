@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Coordenadas do projeto pai -->
+    <groupId>pt.uevora.sd</groupId>
+    <artifactId>environmental-monitoring</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>Sistema de Monitorização Ambiental - UÉvora</name>
+    <description>Sistema distribuído para monitorizar temperatura e humidade na Universidade de Évora</description>
+
+    <!-- Módulos do projeto -->
+    <modules>
+        <module>server</module>
+        <module>client-mqtt</module>
+        <module>client-grpc</module>
+        <module>client-rest</module>
+        <module>admin-cli</module>
+        <module>client-rest</module>
+        <module>admin-cli</module>
+        <module>client-mqtt</module>
+        <module>client-grpc</module>
+    </modules>
+
+    <!-- Propriedades do projeto -->
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Versões das dependências -->
+        <spring.boot.version>3.2.0</spring.boot.version>
+        <grpc.version>1.60.0</grpc.version>
+        <protobuf.version>3.25.1</protobuf.version>
+        <postgresql.version>42.7.1</postgresql.version>
+        <h2.version>2.2.224</h2.version>
+        <activemq.version>6.0.1</activemq.version>
+        <eclipse.paho.version>1.2.5</eclipse.paho.version>
+        <lombok.version>1.18.30</lombok.version>
+        <jackson.version>2.16.0</jackson.version>
+    </properties>
+
+    <!-- Gestão de dependências (versões centralizadas) -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- gRPC -->
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-netty-shaded</artifactId>
+                <version>${grpc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-protobuf</artifactId>
+                <version>${grpc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-stub</artifactId>
+                <version>${grpc.version}</version>
+            </dependency>
+
+            <!-- Protocol Buffers -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+
+            <!-- PostgreSQL -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <!-- H2 Database (para testes) -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+            </dependency>
+
+            <!-- ActiveMQ (MQTT Broker Client) -->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-client</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <!-- Eclipse Paho (MQTT Client) -->
+            <dependency>
+                <groupId>org.eclipse.paho</groupId>
+                <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+                <version>${eclipse.paho.version}</version>
+            </dependency>
+
+            <!-- Lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- Jackson (JSON) -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Build configuration -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Spring Boot Maven Plugin -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                </plugin>
+
+                <!-- Maven Compiler Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+
+                <!-- Protobuf Maven Plugin -->
+                <plugin>
+                    <groupId>org.xolstice.maven.plugins</groupId>
+                    <artifactId>protobuf-maven-plugin</artifactId>
+                    <version>0.6.1</version>
+                    <configuration>
+                        <protocArtifact>
+                            com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
+                        </protocArtifact>
+                        <pluginId>grpc-java</pluginId>
+                        <pluginArtifact>
+                            io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+                        </pluginArtifact>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>compile-custom</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <extensions>
+            <!-- Extensão necessária para detectar o sistema operacional (protobuf) -->
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.1</version>
+            </extension>
+        </extensions>
+    </build>
+
+</project>
