@@ -13,7 +13,7 @@
     </parent>
 
     <artifactId>client-rest</artifactId>
-    <n>Client REST - Simulador de Dispositivos HTTP</n>
+    <name>Client REST - Simulador de Dispositivos HTTP</name>
     <description>Simulador de dispositivos com suporte HTTP que enviam dados via REST</description>
 
     <dependencies>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.14</version>
+            <version>1.4.11</version>
         </dependency>
     </dependencies>
 

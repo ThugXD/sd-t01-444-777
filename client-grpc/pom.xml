@@ -13,7 +13,7 @@
   </parent>
 
   <artifactId>client-grpc</artifactId>
-  <n>Client gRPC - Simulador de Dispositivos Edge</n>
+  <name>Client gRPC - Simulador de Dispositivos Edge</name>
   <description>Simulador de dispositivos edge/gateways que enviam dados via gRPC</description>
 
   <dependencies>
@@ -60,7 +60,7 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.4.14</version>
+      <version>1.4.11</version>
     </dependency>
   </dependencies>
 

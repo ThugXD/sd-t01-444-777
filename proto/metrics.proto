@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "pt.uevora.sd.grpc";
+option java_outer_classname = "MetricsProto";
+
+package metrics;
+
+// Serviço gRPC para envio de métricas
+service MetricsService {
+  // Envia uma métrica única
+  rpc SendMetric(MetricData) returns (MetricResponse);
+
+  // Envia múltiplas métricas em batch (opcional, para otimização)
+  rpc SendMetricsBatch(MetricBatchRequest) returns (MetricResponse);
+}
+
+// Mensagem com os dados da métrica
+message MetricData {
+  string device_id = 1;          // ID único do dispositivo
+  double temperature = 2;         // Temperatura em graus Celsius
+  double humidity = 3;            // Humidade em percentagem
+  string timestamp = 4;           // Timestamp ISO 8601 (ex: 2024-12-08T14:30:00Z)
+}
+
+// Mensagem para envio em batch
+message MetricBatchRequest {
+  repeated MetricData metrics = 1;
+}
+
+// Resposta do servidor após receber métrica(s)
+message MetricResponse {
+  bool success = 1;               // Indica se a operação foi bem-sucedida
+  string message = 2;             // Mensagem de retorno (sucesso ou erro)
+  int32 processed_count = 3;      // Número de métricas processadas
+}

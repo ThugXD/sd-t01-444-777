@@ -21,11 +21,8 @@
         <module>client-grpc</module>
         <module>client-rest</module>
         <module>admin-cli</module>
-        <module>client-rest</module>
-        <module>admin-cli</module>
-        <module>client-mqtt</module>
-        <module>client-grpc</module>
     </modules>
+
 
     <!-- Propriedades do projeto -->
     <properties>
@@ -45,6 +42,21 @@
         <lombok.version>1.18.30</lombok.version>
         <jackson.version>2.16.0</jackson.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
 
     <!-- Gestão de dependências (versões centralizadas) -->
     <dependencyManagement>

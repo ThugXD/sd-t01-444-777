@@ -13,7 +13,7 @@
     </parent>
 
     <artifactId>admin-cli</artifactId>
-    <n>Admin CLI - Cliente de Administração</n>
+    <name>Admin CLI - Cliente de Administração</name>
     <description>Aplicação de linha de comandos para administração do sistema</description>
 
     <dependencies>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.14</version>
+            <version>1.4.11</version>
         </dependency>
 
         <!-- Biblioteca para interface CLI bonita (opcional) -->
