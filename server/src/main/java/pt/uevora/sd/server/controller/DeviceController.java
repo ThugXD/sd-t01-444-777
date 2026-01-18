@@ -62,7 +62,7 @@ public class DeviceController {
      * GET /api/devices/{id} - Obter detalhes de um dispositivo
      */
     @GetMapping("/{id}")
-    public ResponseEntity<DeviceDTO> getDeviceById(@PathVariable String id) {
+    public ResponseEntity<DeviceDTO> getDeviceById(@PathVariable(name = "id") String id) {
         log.info("GET /api/devices/{} - Obter dispositivo", id);
 
         return deviceService.getDeviceById(id)
@@ -75,7 +75,7 @@ public class DeviceController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<DeviceDTO> updateDevice(
-            @PathVariable String id,
+            @PathVariable(name = "id") String id,
             @Valid @RequestBody DeviceDTO deviceDTO) {
 
         log.info("PUT /api/devices/{} - Atualizar dispositivo", id);
@@ -93,7 +93,7 @@ public class DeviceController {
      * DELETE /api/devices/{id} - Eliminar dispositivo
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDevice(@PathVariable String id) {
+    public ResponseEntity<Void> deleteDevice(@PathVariable(name = "id") String id) {
         log.info("DELETE /api/devices/{} - Eliminar dispositivo", id);
 
         try {

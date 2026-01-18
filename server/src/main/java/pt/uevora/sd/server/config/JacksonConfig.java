@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 /**
- * Configuração do Jackson ObjectMapper para serialização JSON
+ * Configuração do JSon ObjectMapper para serialização JSON
  */
 @Configuration
 public class JacksonConfig {

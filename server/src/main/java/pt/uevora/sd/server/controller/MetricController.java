@@ -56,10 +56,10 @@ public class MetricController {
      */
     @GetMapping("/average")
     public ResponseEntity<AverageMetricDTO> getAverageMetrics(
-            @RequestParam String level,
-            @RequestParam String id,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
+            @RequestParam(name = "level") String level,
+            @RequestParam(name = "id") String id,
+            @RequestParam(name = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+            @RequestParam(name = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
 
         log.info("GET /api/metrics/average - Level: {}, ID: {}, Period: {} to {}", level, id, from, to);
 
@@ -81,9 +81,9 @@ public class MetricController {
      */
     @GetMapping("/raw")
     public ResponseEntity<List<MetricDTO>> getRawMetrics(
-            @RequestParam String deviceId,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
+            @RequestParam(name = "deviceId") String deviceId,
+            @RequestParam(name = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+            @RequestParam(name = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
 
         log.info("GET /api/metrics/raw - DeviceId: {}, Period: {} to {}", deviceId, from, to);
 
